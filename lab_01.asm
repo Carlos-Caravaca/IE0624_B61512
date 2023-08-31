@@ -15,6 +15,7 @@
 ;--------------------------------------------------------
 ; external declarations
 ;--------------------------------------------------------
+	extern	_ANSEL
 	extern	_TRISIO
 	extern	_GPIO
 	extern	_GPIObits
@@ -103,95 +104,33 @@ code_lab_01	code
 ;  pBlock Stats: dbName = M
 ;***
 ;has an exit
-;functions called:
-;   _delay
-;   _delay
-;   _delay
-;   _delay
-;   _delay
-;   _delay
-;   _delay
-;   _delay
-;   _delay
-;   _delay
-;   _delay
-;   _delay
-;1 compiler assigned register :
-;   STK00
 ;; Starting pCode block
 S_lab_01__main	code
 _main:
 ; 2 exit points
-;	.line	23; "lab_01.c"	TRISIO = 0b00000000; // Configurar pines como salidas
-	BANKSEL	_TRISIO
+;	.line	24; "lab_01.c"	ANSEL = 0;
+	BANKSEL	_ANSEL
+	CLRF	_ANSEL
+;	.line	25; "lab_01.c"	TRISIO = 0b00000000; // Configurar pines como salidas
 	CLRF	_TRISIO
-;	.line	24; "lab_01.c"	GPIO = 0b00001000; //Poner pines en bajo
+;	.line	26; "lab_01.c"	GPIO = 0b00001000; //Poner pines en bajo
 	MOVLW	0x08
 	BANKSEL	_GPIO
 	MOVWF	_GPIO
 _00106_DS_:
-;	.line	29; "lab_01.c"	GP0 = 1;
-	BANKSEL	_GPIObits
-	BSF	_GPIObits,0
-;	.line	30; "lab_01.c"	delay(time);
-	MOVLW	0x64
-	MOVWF	STK00
-	MOVLW	0x00
-	PAGESEL	_delay
-	CALL	_delay
-	PAGESEL	$
-;	.line	31; "lab_01.c"	GP1 = 1;
+;	.line	56; "lab_01.c"	GP1 = 1;
 	BANKSEL	_GPIObits
 	BSF	_GPIObits,1
-;	.line	32; "lab_01.c"	delay(time);
-	MOVLW	0x64
-	MOVWF	STK00
-	MOVLW	0x00
-	PAGESEL	_delay
-	CALL	_delay
-	PAGESEL	$
-;	.line	33; "lab_01.c"	GP2 = 1;
-	BANKSEL	_GPIObits
+;	.line	57; "lab_01.c"	GP0 = 1;
+	BSF	_GPIObits,0
+;	.line	58; "lab_01.c"	GP2 = 1;
 	BSF	_GPIObits,2
-;	.line	34; "lab_01.c"	delay(time);
-	MOVLW	0x64
-	MOVWF	STK00
-	MOVLW	0x00
-	PAGESEL	_delay
-	CALL	_delay
-	PAGESEL	$
-;	.line	35; "lab_01.c"	GP4 = 1;
-	BANKSEL	_GPIObits
+;	.line	59; "lab_01.c"	GP4 = 1;
 	BSF	_GPIObits,4
-;	.line	36; "lab_01.c"	delay(time);
-	MOVLW	0x64
-	MOVWF	STK00
-	MOVLW	0x00
-	PAGESEL	_delay
-	CALL	_delay
-	PAGESEL	$
-;	.line	37; "lab_01.c"	GP5 = 1;
-	BANKSEL	_GPIObits
+;	.line	60; "lab_01.c"	GP5 = 1;
 	BSF	_GPIObits,5
-;	.line	38; "lab_01.c"	delay(time);
-	MOVLW	0x64
-	MOVWF	STK00
-	MOVLW	0x00
-	PAGESEL	_delay
-	CALL	_delay
-	PAGESEL	$
-;	.line	39; "lab_01.c"	GP5 = 0;
-	BANKSEL	_GPIObits
-	BCF	_GPIObits,5
-;	.line	40; "lab_01.c"	delay(time);
-	MOVLW	0x64
-	MOVWF	STK00
-	MOVLW	0x00
-	PAGESEL	_delay
-	CALL	_delay
-	PAGESEL	$
 	GOTO	_00106_DS_
-;	.line	49; "lab_01.c"	}
+;	.line	65; "lab_01.c"	}
 	RETURN	
 ; exit point of _main
 
@@ -213,11 +152,11 @@ _00106_DS_:
 S_lab_01__delay	code
 _delay:
 ; 2 exit points
-;	.line	50; "lab_01.c"	void delay(unsigned int tiempo)
+;	.line	66; "lab_01.c"	void delay(unsigned int tiempo)
 	MOVWF	r0x1000
 	MOVF	STK00,W
 	MOVWF	r0x1001
-;	.line	55; "lab_01.c"	for(i=0;i<tiempo;i++)
+;	.line	71; "lab_01.c"	for(i=0;i<tiempo;i++)
 	CLRF	r0x1002
 	CLRF	r0x1003
 _00117_DS_:
@@ -230,8 +169,8 @@ _00117_DS_:
 _00138_DS_:
 	BTFSC	STATUS,0
 	GOTO	_00119_DS_
-;;genSkipc:3307: created from rifx:0x7ffebee27140
-;	.line	56; "lab_01.c"	for(j=0;j<1275;j++);
+;;genSkipc:3307: created from rifx:0x7ffdb4c5d810
+;	.line	72; "lab_01.c"	for(j=0;j<1275;j++);
 	MOVLW	0xfb
 	MOVWF	r0x1004
 	MOVLW	0x04
@@ -254,18 +193,18 @@ _00115_DS_:
 	IORWF	r0x1006,W
 	BTFSS	STATUS,2
 	GOTO	_00115_DS_
-;	.line	55; "lab_01.c"	for(i=0;i<tiempo;i++)
+;	.line	71; "lab_01.c"	for(i=0;i<tiempo;i++)
 	INCF	r0x1002,F
 	BTFSC	STATUS,2
 	INCF	r0x1003,F
 	GOTO	_00117_DS_
 _00119_DS_:
-;	.line	57; "lab_01.c"	}
+;	.line	73; "lab_01.c"	}
 	RETURN	
 ; exit point of _delay
 
 
 ;	code size estimation:
-;	   74+   20 =    94 instructions (  228 byte)
+;	   50+    3 =    53 instructions (  112 byte)
 
 	end

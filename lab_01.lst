@@ -1,0 +1,288 @@
+gplink-1.4.0 #1107 (Jan  1 2021)
+Copyright (c) 1998-2014 gputils project
+Listing File Generated: 8-31-2023  00:46:15
+ 
+ 
+Address  Value    Disassembly              Source
+-------  -----    -----------              ------
+                                           ;--------------------------------------------------------
+                                           ; File Created by SDCC : free open source ANSI-C Compiler
+                                           ; Version 4.0.0 #11528 (Linux)
+                                           ;--------------------------------------------------------
+                                           ; PIC port for the 14-bit core
+                                           ;--------------------------------------------------------
+                                           ;	.file	"lab_01.c"
+                                           	list	p=12f675
+                                           	radix dec
+                                           	include "p12f675.inc"
+                                                   LIST
+                                           
+                                           ;==========================================================================
+                                           ; Build date : Aug 07 2014
+                                           ;  MPASM PIC12F675 processor include
+                                           ; 
+                                           ;  (c) Copyright 1999-2014 Microchip Technology, All rights reserved
+                                           ;==========================================================================
+                                           
+                                                   NOLIST
+                                           ;--------------------------------------------------------
+                                           ; config word(s)
+                                           ;--------------------------------------------------------
+002007   3f14     addlw   0x14             	__config 0x3f14
+                                           ;--------------------------------------------------------
+                                           ; external declarations
+                                           ;--------------------------------------------------------
+                                           	extern	_TRISIO
+                                           	extern	_GPIO
+                                           	extern	_GPIObits
+                                           	extern	__sdcc_gsinit_startup
+                                           ;--------------------------------------------------------
+                                           ; global declarations
+                                           ;--------------------------------------------------------
+                                           	global	_main
+                                           	global	_delay
+                                           
+                                           	global PSAVE
+                                           	global SSAVE
+                                           	global WSAVE
+                                           	global STK12
+                                           	global STK11
+                                           	global STK10
+                                           	global STK09
+                                           	global STK08
+                                           	global STK07
+                                           	global STK06
+                                           	global STK05
+                                           	global STK04
+                                           	global STK03
+                                           	global STK02
+                                           	global STK01
+                                           	global STK00
+                                           
+                                           sharebank udata_ovr 0x0020
+                                           PSAVE	res 1
+                                           SSAVE	res 1
+                                           WSAVE	res 1
+                                           STK12	res 1
+                                           STK11	res 1
+                                           STK10	res 1
+                                           STK09	res 1
+                                           STK08	res 1
+                                           STK07	res 1
+                                           STK06	res 1
+                                           STK05	res 1
+                                           STK04	res 1
+                                           STK03	res 1
+                                           STK02	res 1
+                                           STK01	res 1
+                                           STK00	res 1
+                                           
+                                           ;--------------------------------------------------------
+                                           ; global definitions
+                                           ;--------------------------------------------------------
+                                           ;--------------------------------------------------------
+                                           ; absolute symbol definitions
+                                           ;--------------------------------------------------------
+                                           ;--------------------------------------------------------
+                                           ; compiler-defined variables
+                                           ;--------------------------------------------------------
+                                           UDL_lab_01_0	udata
+                                           r0x1001	res	1
+                                           r0x1000	res	1
+                                           r0x1002	res	1
+                                           r0x1003	res	1
+                                           r0x1004	res	1
+                                           r0x1005	res	1
+                                           r0x1006	res	1
+                                           r0x1007	res	1
+                                           ;--------------------------------------------------------
+                                           ; initialized data
+                                           ;--------------------------------------------------------
+                                           ;--------------------------------------------------------
+                                           ; initialized absolute data
+                                           ;--------------------------------------------------------
+                                           ;--------------------------------------------------------
+                                           ; overlayable items in internal ram 
+                                           ;--------------------------------------------------------
+                                           ;	udata_ovr
+                                           ;--------------------------------------------------------
+                                           ; reset vector 
+                                           ;--------------------------------------------------------
+                                           STARTUP	code 0x0000
+000000   0000     nop                      	nop
+                                           	pagesel __sdcc_gsinit_startup
+000001   2802     goto    0x0002           	goto	__sdcc_gsinit_startup
+                                           ;--------------------------------------------------------
+                                           ; code
+                                           ;--------------------------------------------------------
+                                           code_lab_01	code
+                                           ;***
+                                           ;  pBlock Stats: dbName = M
+                                           ;***
+                                           ;has an exit
+                                           ;functions called:
+                                           ;   _delay
+                                           ;   _delay
+                                           ;   _delay
+                                           ;   _delay
+                                           ;   _delay
+                                           ;   _delay
+                                           ;   _delay
+                                           ;   _delay
+                                           ;   _delay
+                                           ;   _delay
+                                           ;   _delay
+                                           ;   _delay
+                                           ;1 compiler assigned register :
+                                           ;   STK00
+                                           ;; Starting pCode block
+                                           S_lab_01__main	code
+                                           _main:
+                                           ; 2 exit points
+                                           ;	.line	23; "lab_01.c"	TRISIO = 0b00000000; // Configurar pines como salidas
+0000d2   1683     bsf     0x03, 0x5        	BANKSEL	_TRISIO
+0000d3   0185     clrf    0x05             	CLRF	_TRISIO
+                                           ;	.line	24; "lab_01.c"	GPIO = 0b00001000; //Poner pines en bajo
+0000d4   3008     movlw   0x08             	MOVLW	0x08
+0000d5   1283     bcf     0x03, 0x5        	BANKSEL	_GPIO
+0000d6   0085     movwf   0x05             	MOVWF	_GPIO
+                                           _00106_DS_:
+                                           ;	.line	29; "lab_01.c"	GP0 = 1;
+0000d7   1283     bcf     0x03, 0x5        	BANKSEL	_GPIObits
+0000d8   1405     bsf     0x05, 0x0        	BSF	_GPIObits,0
+                                           ;	.line	30; "lab_01.c"	delay(time);
+0000d9   3064     movlw   0x64             	MOVLW	0x64
+0000da   00af     movwf   0x2f             	MOVWF	STK00
+0000db   3000     movlw   0x00             	MOVLW	0x00
+                                           	PAGESEL	_delay
+0000dc   20fd     call    0x00fd           	CALL	_delay
+                                           	PAGESEL	$
+                                           ;	.line	31; "lab_01.c"	GP1 = 1;
+0000dd   1283     bcf     0x03, 0x5        	BANKSEL	_GPIObits
+0000de   1485     bsf     0x05, 0x1        	BSF	_GPIObits,1
+                                           ;	.line	32; "lab_01.c"	delay(time);
+0000df   3064     movlw   0x64             	MOVLW	0x64
+0000e0   00af     movwf   0x2f             	MOVWF	STK00
+0000e1   3000     movlw   0x00             	MOVLW	0x00
+                                           	PAGESEL	_delay
+0000e2   20fd     call    0x00fd           	CALL	_delay
+                                           	PAGESEL	$
+                                           ;	.line	33; "lab_01.c"	GP2 = 1;
+0000e3   1283     bcf     0x03, 0x5        	BANKSEL	_GPIObits
+0000e4   1505     bsf     0x05, 0x2        	BSF	_GPIObits,2
+                                           ;	.line	34; "lab_01.c"	delay(time);
+0000e5   3064     movlw   0x64             	MOVLW	0x64
+0000e6   00af     movwf   0x2f             	MOVWF	STK00
+0000e7   3000     movlw   0x00             	MOVLW	0x00
+                                           	PAGESEL	_delay
+0000e8   20fd     call    0x00fd           	CALL	_delay
+                                           	PAGESEL	$
+                                           ;	.line	35; "lab_01.c"	GP4 = 1;
+0000e9   1283     bcf     0x03, 0x5        	BANKSEL	_GPIObits
+0000ea   1605     bsf     0x05, 0x4        	BSF	_GPIObits,4
+                                           ;	.line	36; "lab_01.c"	delay(time);
+0000eb   3064     movlw   0x64             	MOVLW	0x64
+0000ec   00af     movwf   0x2f             	MOVWF	STK00
+0000ed   3000     movlw   0x00             	MOVLW	0x00
+                                           	PAGESEL	_delay
+0000ee   20fd     call    0x00fd           	CALL	_delay
+                                           	PAGESEL	$
+                                           ;	.line	37; "lab_01.c"	GP5 = 1;
+0000ef   1283     bcf     0x03, 0x5        	BANKSEL	_GPIObits
+0000f0   1685     bsf     0x05, 0x5        	BSF	_GPIObits,5
+                                           ;	.line	38; "lab_01.c"	delay(time);
+0000f1   3064     movlw   0x64             	MOVLW	0x64
+0000f2   00af     movwf   0x2f             	MOVWF	STK00
+0000f3   3000     movlw   0x00             	MOVLW	0x00
+                                           	PAGESEL	_delay
+0000f4   20fd     call    0x00fd           	CALL	_delay
+                                           	PAGESEL	$
+                                           ;	.line	39; "lab_01.c"	GP5 = 0;
+0000f5   1283     bcf     0x03, 0x5        	BANKSEL	_GPIObits
+0000f6   1285     bcf     0x05, 0x5        	BCF	_GPIObits,5
+                                           ;	.line	40; "lab_01.c"	delay(time);
+0000f7   3064     movlw   0x64             	MOVLW	0x64
+0000f8   00af     movwf   0x2f             	MOVWF	STK00
+0000f9   3000     movlw   0x00             	MOVLW	0x00
+                                           	PAGESEL	_delay
+0000fa   20fd     call    0x00fd           	CALL	_delay
+                                           	PAGESEL	$
+0000fb   28d7     goto    0x00d7           	GOTO	_00106_DS_
+                                           ;	.line	49; "lab_01.c"	}
+0000fc   0008     return                   	RETURN	
+                                           ; exit point of _main
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;has an exit
+                                           ;9 compiler assigned registers:
+                                           ;   r0x1000
+                                           ;   STK00
+                                           ;   r0x1001
+                                           ;   r0x1002
+                                           ;   r0x1003
+                                           ;   r0x1004
+                                           ;   r0x1005
+                                           ;   r0x1006
+                                           ;   r0x1007
+                                           ;; Starting pCode block
+                                           S_lab_01__delay	code
+                                           _delay:
+                                           ; 2 exit points
+                                           ;	.line	50; "lab_01.c"	void delay(unsigned int tiempo)
+0000fd   00bd     movwf   0x3d             	MOVWF	r0x1000
+0000fe   082f     movf    0x2f, 0x0        	MOVF	STK00,W
+0000ff   00bc     movwf   0x3c             	MOVWF	r0x1001
+                                           ;	.line	55; "lab_01.c"	for(i=0;i<tiempo;i++)
+000100   01be     clrf    0x3e             	CLRF	r0x1002
+000101   01bf     clrf    0x3f             	CLRF	r0x1003
+                                           _00117_DS_:
+000102   083d     movf    0x3d, 0x0        	MOVF	r0x1000,W
+000103   023f     subwf   0x3f, 0x0        	SUBWF	r0x1003,W
+000104   1d03     btfss   0x03, 0x2        	BTFSS	STATUS,2
+000105   2908     goto    0x0108           	GOTO	_00138_DS_
+000106   083c     movf    0x3c, 0x0        	MOVF	r0x1001,W
+000107   023e     subwf   0x3e, 0x0        	SUBWF	r0x1002,W
+                                           _00138_DS_:
+000108   1803     btfsc   0x03, 0x0        	BTFSC	STATUS,0
+000109   2923     goto    0x0123           	GOTO	_00119_DS_
+                                           ;;genSkipc:3307: created from rifx:0x7ffebee27140
+                                           ;	.line	56; "lab_01.c"	for(j=0;j<1275;j++);
+00010a   30fb     movlw   0xfb             	MOVLW	0xfb
+00010b   00c0     movwf   0x40             	MOVWF	r0x1004
+00010c   3004     movlw   0x04             	MOVLW	0x04
+00010d   00c1     movwf   0x41             	MOVWF	r0x1005
+                                           _00115_DS_:
+00010e   30ff     movlw   0xff             	MOVLW	0xff
+00010f   0740     addwf   0x40, 0x0        	ADDWF	r0x1004,W
+000110   00c2     movwf   0x42             	MOVWF	r0x1006
+000111   30ff     movlw   0xff             	MOVLW	0xff
+000112   00c3     movwf   0x43             	MOVWF	r0x1007
+000113   0841     movf    0x41, 0x0        	MOVF	r0x1005,W
+000114   1803     btfsc   0x03, 0x0        	BTFSC	STATUS,0
+000115   0f41     incfsz  0x41, 0x0        	INCFSZ	r0x1005,W
+000116   07c3     addwf   0x43, 0x1        	ADDWF	r0x1007,F
+000117   0842     movf    0x42, 0x0        	MOVF	r0x1006,W
+000118   00c0     movwf   0x40             	MOVWF	r0x1004
+000119   0843     movf    0x43, 0x0        	MOVF	r0x1007,W
+00011a   00c1     movwf   0x41             	MOVWF	r0x1005
+00011b   0843     movf    0x43, 0x0        	MOVF	r0x1007,W
+00011c   0442     iorwf   0x42, 0x0        	IORWF	r0x1006,W
+00011d   1d03     btfss   0x03, 0x2        	BTFSS	STATUS,2
+00011e   290e     goto    0x010e           	GOTO	_00115_DS_
+                                           ;	.line	55; "lab_01.c"	for(i=0;i<tiempo;i++)
+00011f   0abe     incf    0x3e, 0x1        	INCF	r0x1002,F
+000120   1903     btfsc   0x03, 0x2        	BTFSC	STATUS,2
+000121   0abf     incf    0x3f, 0x1        	INCF	r0x1003,F
+000122   2902     goto    0x0102           	GOTO	_00117_DS_
+                                           _00119_DS_:
+                                           ;	.line	57; "lab_01.c"	}
+000123   0008     return                   	RETURN	
+                                           ; exit point of _delay
+                                           
+                                           
+                                           ;	code size estimation:
+                                           ;	   74+   20 =    94 instructions (  228 byte)
+                                           
+                                           	end

@@ -7,17 +7,18 @@ Este repositorio contiene dos directorios. En `lab_01`, encontrarás el trabajo 
 # Árbol de directoios: #
 
 - **main**
-  - **lab_01**
-    - **informe**
-        - informe.pdf
-    - **src**
-        - lab_01.c
-        - lab_01.simu
-        - Makefile
-  - **lab_02**
-    - **informe**
-        - informe.pdf
-    - **src**
-        - lab_02.c
-        - lab_02.simu
-        - Makefile
+    - **lab_01**
+        - **informe**
+            - informe.pdf
+        - **src**
+            - lab_01.c
+            - lab_01.simu
+            - Makefile
+    - **lab_02**
+        - **informe**
+            - informe.pdf
+        - **src**
+            - lab_02.c
+            - lab_02.simu
+            - Makefile
+    - **README.md**

@@ -1,56 +1,40 @@
 #include <avr/io.h>
-#include <util/delay.h>
+#include <avr/interrupt.h>
 
-// Definir los pines para el semáforo de tráfico
-#define SEM_TRAFICO_ROJO_PIN    PB0
-#define SEM_TRAFICO_AMARILLO_PIN PB1
-#define SEM_TRAFICO_VERDE_PIN    PB2
+#define LED_PIN PB0
 
-// Definir los pines para el semáforo peatonal
-#define SEM_PEATON_VERDE_PIN     PB3
-#define SEM_PEATON_ROJO_PIN      PB4
+volatile uint32_t ms = 0;
 
-void semaforoTrafico() {
-    // Configurar los pines del semáforo de tráfico como salidas
-    DDRB |= (1 << SEM_TRAFICO_ROJO_PIN) | (1 << SEM_TRAFICO_AMARILLO_PIN) | (1 << SEM_TRAFICO_VERDE_PIN);
-
-    // Encender luz verde del semáforo de tráfico
-    PORTB |= (1 << SEM_TRAFICO_VERDE_PIN);
-    _delay_ms(5000); // Esperar 5 segundos
-
-    // Cambiar a luz amarilla
-    PORTB &= ~(1 << SEM_TRAFICO_VERDE_PIN);
-    PORTB |= (1 << SEM_TRAFICO_AMARILLO_PIN);
-    _delay_ms(2000); // Esperar 2 segundos
-
-    // Cambiar a luz roja
-    PORTB &= ~(1 << SEM_TRAFICO_AMARILLO_PIN);
-    PORTB |= (1 << SEM_TRAFICO_ROJO_PIN);
-    _delay_ms(5000); // Esperar 5 segundos
-
-    // Volver al verde
-    PORTB &= ~(1 << SEM_TRAFICO_ROJO_PIN);
-    PORTB |= (1 << SEM_TRAFICO_VERDE_PIN);
+// Función de inicialización del Timer1
+void Timer1_Init() {
+    TCCR1A = 0;             // Modo normal de operación
+    TCCR1B = (1 << WGM12);  // Configura el temporizador en modo CTC
+    OCR1A = 249;            // Valor para comparación (249 ciclos, asumiendo una frecuencia de reloj de 16 MHz y preescalador de 64)
+    TIMSK |= (1 << OCIE1A); // Habilita la interrupción por comparación con OCR1A
+    TCCR1B |= (1 << CS11) | (1 << CS10); // Configura el preescalador a 64
 }
 
-void semaforoPeatonal() {
-    // Configurar los pines del semáforo peatonal como salidas
-    DDRB |= (1 << SEM_PEATON_VERDE_PIN) | (1 << SEM_PEATON_ROJO_PIN);
+// Rutina de interrupción del Timer1 (OCIE1A)
+ISR(TIMER1_COMPA_vect) {
+    ms++; // Incrementa el contador de milisegundos en cada interrupción
+}
 
-    // Encender luz roja del semáforo peatonal
-    PORTB |= (1 << SEM_PEATON_ROJO_PIN);
-    _delay_ms(5000); // Esperar 5 segundos
-
-    // Cambiar a luz verde
-    PORTB &= ~(1 << SEM_PEATON_ROJO_PIN);
-    PORTB |= (1 << SEM_PEATON_VERDE_PIN);
-    _delay_ms(5000); // Esperar 5 segundos
+// Función para esperar un número de milisegundos usando Timer1
+void time1_delay(uint32_t ms) {
+    uint32_t start_time = ms;
+    while (ms - start_time < ms) {
+        // Espera hasta que se alcance el tiempo deseado
+    }
 }
 
 int main(void) {
+    DDRB |= (1 << LED_PIN); // Configura el pin del LED como salida
+    Timer1_Init(); // Inicializa Timer1
+    sei(); // Habilita las interrupciones globales
+
     while (1) {
-        semaforoTrafico();
-        semaforoPeatonal();
+        PORTB ^= (1 << LED_PIN); // Invierte el estado del LED
+        time1_delay(2000); // Espera 1000 ms (1 segundo)
     }
 
     return 0;

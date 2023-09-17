@@ -57,16 +57,17 @@ int main(void) {
     Button_Init();      // inicializa el botón
     sei();              // Habilita las interrupciones globales
     int WAIT = 1; 
+    int buttonPressed = Button_IsPressed();
 
     while (1) {
         // Se establece el estado inicial en verde para vehiculos
         // y rojo para peatones
+        int botonPresionado = 0; // Inicialmente, el botón no está presionado
         PORTB |= (1 << LED_PB1);    //verde vehiculo endendido
         PORTB |= (1 << LED_PB3);    //rojo peaton encendido
         PORTD &= ~(1 << LED_PD5);   //rojo vehiculo apagado
         PORTB &= ~(1 << LED_PB2);   //verde peaton apagado
         PORTB &= ~(1 << LED_PB0);   //amarillo apagado
-        Button_IsPressed();
         
         if (WAIT)
         {

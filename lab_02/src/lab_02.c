@@ -1,11 +1,11 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#define LED_PB0 PB0     // LED Amarillo vehículo
-#define LED_PB1 PB1     // LED Verde vehículo
-#define LED_PB2 PB2     // LED Verde peaton
-#define LED_PB3 PB3     // LED Rojo peaton
-#define LED_PD5 PD5     // LED Rojo vehículo
+#define YELLOW PB0     // LED Amarillo vehículo
+#define LDPV PB1     // LED Verde vehículo
+#define LDPP PB2     // LED Verde peaton
+#define LDPD PB3     // LED Rojo peaton
+#define LDVD PD5     // LED Rojo vehículo
 #define BUTTON_PIN PB6  // PIN Botón
 
 volatile uint32_t mili_seg = 0;
@@ -47,11 +47,11 @@ uint8_t Button_IsPressed() {
 
 int main(void) {
     // Se configuran los pines de los LEDs como salidas
-    DDRB |= (1 << LED_PB0); 
-    DDRB |= (1 << LED_PB1);
-    DDRB |= (1 << LED_PB2);
-    DDRB |= (1 << LED_PB3);
-    DDRD |= (1 << LED_PD5);
+    DDRB |= (1 << YELLOW); 
+    DDRB |= (1 << LDPV);
+    DDRB |= (1 << LDPP);
+    DDRB |= (1 << LDPD);
+    DDRD |= (1 << LDVD);
 
     Timer1_Init();      // Inicializa Timer1
     Button_Init();      // Inicializa el botón
@@ -61,12 +61,13 @@ int main(void) {
 
     while (1) {
         // Estado inicial en verde para vehiculos y rojo para peatones
+        // 10s
         buttonState = Button_IsPressed(); // Guarda el estado del botón
-        PORTB |= (1 << LED_PB1);    // Verde vehÍculo endendido
-        PORTB |= (1 << LED_PB3);    // Rojo peatón encendido
-        PORTD &= ~(1 << LED_PD5);   // Rojo vehículo apagado
-        PORTB &= ~(1 << LED_PB2);   // Verde peaton apagado
-        PORTB &= ~(1 << LED_PB0);   // Amarillo apagado
+        PORTB |= (1 << LDPV);    // Verde vehÍculo endendido
+        PORTB |= (1 << LDPD);    // Rojo peatón encendido
+        PORTD &= ~(1 << LDVD);   // Rojo vehículo apagado
+        PORTB &= ~(1 << LDPP);   // Verde peaton apagado
+        PORTB &= ~(1 << YELLOW);   // Amarillo apagado
         
         // Estado de espera inicial 10s
         if (WAIT)
@@ -77,39 +78,40 @@ int main(void) {
         
         if (buttonState) {
             // LDPV parpadeando durante 3 segundos de la luz verde
-            PORTB &= ~(1 << LED_PB3);
-            PORTB &= ~(1 << LED_PB1);
-            PORTB &= ~(1 << LED_PB0); 
+            // 3 SEGUNDOS
+            PORTB &= ~(1 << LDPV);
+            PORTB &= ~(1 << LDPD);
+            PORTB &= ~(1 << YELLOW); 
             timer01_ms(500);
-            PORTB |= (1 << LED_PB1);
+            PORTB |= (1 << LDPV);
             //PORTB |= (1 << LED_PB0);
             timer01_ms(500);
-            PORTB &= ~(1 << LED_PB1);
-            PORTB &= ~(1 << LED_PB0); 
+            PORTB &= ~(1 << LDPV);
+            PORTB &= ~(1 << YELLOW); 
             timer01_ms(500);
             // Parpadea la luz amarilla, escenario más realístico
             //PORTB |= (1 << LED_PB1);
-            PORTB |= (1 << LED_PB0);
+            PORTB |= (1 << YELLOW);
             timer01_ms(500);
             //PORTB &= ~(1 << LED_PB1);
-            PORTB &= ~(1 << LED_PB0); 
+            PORTB &= ~(1 << YELLOW); 
             timer01_ms(500);
             //PORTB |= (1 << LED_PB1);
-            PORTB |= (1 << LED_PB0);
+            PORTB |= (1 << YELLOW);
             timer01_ms(500);
-            PORTB &= ~(1 << LED_PB1);
-            PORTB &= ~(1 << LED_PB0); 
+            PORTB &= ~(1 << LDPV);
+            PORTB &= ~(1 << YELLOW); 
             // Encendido LED verde peaton y LED rojo vehiculo
-            PORTB |= (1 << LED_PB2);
-            PORTD |= (1 << LED_PD5);
+            PORTB |= (1 << LDPP);
+            PORTD |= (1 << LDVD);
             timer01_ms(15000);
 
             // Regresa al estado inicial
-            PORTB |= (1 << LED_PB1);    // LED Verde vehículo endendido
-            PORTB |= (1 << LED_PB3);    // LED Rojo peatón encendido
-            PORTD &= ~(1 << LED_PD5);   // LED Rojo vehículo apagado
-            PORTB &= ~(1 << LED_PB2);   // LED Verde peatón apagado
-            PORTB &= ~(1 << LED_PB0);   // LED Amarillo apagado
+            PORTB |= (1 << LDPV);    // LED Verde vehículo endendido
+            PORTB |= (1 << LDPD);    // LED Rojo peatón encendido
+            PORTD &= ~(1 << LDVD);   // LED Rojo vehículo apagado
+            PORTB &= ~(1 << LDPP);   // LED Verde peatón apagado
+            PORTB &= ~(1 << YELLOW);   // LED Amarillo apagado
 
             // Espera hasta que se libere el botón para evitar múltiples pulsaciones
             //while (Button_IsPressed()) {}

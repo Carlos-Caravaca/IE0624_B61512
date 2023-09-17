@@ -61,19 +61,18 @@ int main(void) {
     while (1) {
         // Se establece el estado inicial en verde para vehiculos
         // y rojo para peatones
+        PORTB |= (1 << LED_PB1);    //verde vehiculo endendido
+        PORTB |= (1 << LED_PB3);    //rojo peaton encendido
+        PORTD &= ~(1 << LED_PD5);   //rojo vehiculo apagado
+        PORTB &= ~(1 << LED_PB2);   //verde peaton apagado
+        PORTB &= ~(1 << LED_PB0);   //amarillo apagado
+        
         if (WAIT)
         {
             timer01_ms(10000);
             WAIT = 0;
         }
         
-        PORTB |= (1 << LED_PB1);    //verde vehiculo endendido
-        PORTB |= (1 << LED_PB3);    //rojo peaton encendido
-        PORTD &= ~(1 << LED_PD5);   //rojo vehiculo apagado
-        PORTB &= ~(1 << LED_PB2);   //verde peaton apagado
-        PORTB &= ~(1 << LED_PB0);   //amarillo apagado
-        //timer01_ms(10000);
-
         // se debe mantener pulsado el boton hasta que inicie 
         // la secuencia de luces, en ese momento ya se puede soltar
         if (Button_IsPressed()) {

@@ -1,11 +1,11 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#define LED_PB0 PB0     //rojo vehiculo
+#define LED_PB0 PB0     //amarillo vehículo
 #define LED_PB1 PB1     //verde vehiculo
 #define LED_PB2 PB2     //verde peaton
 #define LED_PB3 PB3     //rojo peaton
-#define LED_PD5 PD5     //amarillo
+#define LED_PD5 PD5     // Rojo vehículo
 #define BUTTON_PIN PB6  //boton
 
 volatile uint32_t mili_seg = 0;
@@ -23,6 +23,7 @@ void Timer1_Init() {
 ISR(TIMER1_COMPA_vect) {
     mili_seg++; // incrementa el contador de milisegundos en cada interrupción
 }
+
 
 // función para esperar un número de milisegundos usando Timer1
 void timer01_ms(uint32_t ms) {
@@ -55,22 +56,29 @@ int main(void) {
     Timer1_Init();      // inicializa Timer1
     Button_Init();      // inicializa el botón
     sei();              // Habilita las interrupciones globales
+    int WAIT = 1; 
 
     while (1) {
         // Se establece el estado inicial en verde para vehiculos
         // y rojo para peatones
+        if (WAIT)
+        {
+            timer01_ms(10000);
+            WAIT = 0;
+        }
+        
         PORTB |= (1 << LED_PB1);    //verde vehiculo endendido
         PORTB |= (1 << LED_PB3);    //rojo peaton encendido
         PORTD &= ~(1 << LED_PD5);   //rojo vehiculo apagado
         PORTB &= ~(1 << LED_PB2);   //verde peaton apagado
         PORTB &= ~(1 << LED_PB0);   //amarillo apagado
-        timer01_ms(10000);
+        //timer01_ms(10000);
 
         // se debe mantener pulsado el boton hasta que inicie 
         // la secuencia de luces, en ese momento ya se puede soltar
         if (Button_IsPressed()) {
             // LDPV parpedeando durante 3 segundos
-            // junto conluz amarilla
+            // junto con la luz amarilla
             PORTB &= ~(1 << LED_PB3);
             PORTB &= ~(1 << LED_PB1);
             PORTB &= ~(1 << LED_PB0); 
@@ -81,13 +89,13 @@ int main(void) {
             PORTB &= ~(1 << LED_PB1);
             PORTB &= ~(1 << LED_PB0); 
             timer01_ms(500);
-            PORTB |= (1 << LED_PB1);
+            //PORTB |= (1 << LED_PB1);
             PORTB |= (1 << LED_PB0);
             timer01_ms(500);
-            PORTB &= ~(1 << LED_PB1);
+            //PORTB &= ~(1 << LED_PB1);
             PORTB &= ~(1 << LED_PB0); 
             timer01_ms(500);
-            PORTB |= (1 << LED_PB1);
+            //PORTB |= (1 << LED_PB1);
             PORTB |= (1 << LED_PB0);
             timer01_ms(500);
             PORTB &= ~(1 << LED_PB1);
@@ -107,10 +115,8 @@ int main(void) {
 
             // Espera hasta que se libere el botón para evitar múltiples pulsaciones
             while (Button_IsPressed()) {}
+            WAIT = 1;
         }
     }
-
-    return 0;
-
-    
+    return 0;   
 }

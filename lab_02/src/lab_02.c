@@ -77,7 +77,7 @@ int main(void) {
         
         // se debe mantener pulsado el boton hasta que inicie 
         // la secuencia de luces, en ese momento ya se puede soltar
-        if (Button_IsPressed()) {
+        if (buttonState) {
             // LDPV parpedeando durante 3 segundos
             // junto con la luz amarilla
             PORTB &= ~(1 << LED_PB3);

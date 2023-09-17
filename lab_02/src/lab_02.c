@@ -66,7 +66,8 @@ int main(void) {
         PORTD &= ~(1 << LED_PD5);   //rojo vehiculo apagado
         PORTB &= ~(1 << LED_PB2);   //verde peaton apagado
         PORTB &= ~(1 << LED_PB0);   //amarillo apagado
-        
+        Button_IsPressed();
+
         if (WAIT)
         {
             timer01_ms(10000);

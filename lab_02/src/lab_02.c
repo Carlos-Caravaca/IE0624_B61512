@@ -85,26 +85,49 @@ int main(void) {
             timer01_ms(500);
             PORTB |= (1 << LDPV);
             //PORTB |= (1 << LED_PB0);
-            timer01_ms(500);
+            timer01_ms(500);        // 1 segundo
             PORTB &= ~(1 << LDPV);
             PORTB &= ~(1 << YELLOW); 
             timer01_ms(500);
             // Parpadea la luz amarilla, escenario más realístico
             //PORTB |= (1 << LED_PB1);
             PORTB |= (1 << YELLOW);
-            timer01_ms(500);
+            timer01_ms(500);        // 2 segundos
             //PORTB &= ~(1 << LED_PB1);
             PORTB &= ~(1 << YELLOW); 
             timer01_ms(500);
             //PORTB |= (1 << LED_PB1);
             PORTB |= (1 << YELLOW);
-            timer01_ms(500);
+            timer01_ms(500);        // 3 segundo
             PORTB &= ~(1 << LDPV);
             PORTB &= ~(1 << YELLOW); 
-            // Encendido LED verde peaton y LED rojo vehiculo
+            // Encendido LED rojo vehiculo
+            PORTD |= (1 << LDVD);   // espera 1 segundo
+            timer01_ms(1000);      
+            // Encendido LED verde peaton
+            PORTB |= (1 << LDPP);
+            timer01_ms(10000);      // espera 11 segundos
+            PORTB &= ~(1 << LDPP);
+            PORTD |= (1 << LDVD);
+            timer01_ms(500);
             PORTB |= (1 << LDPP);
             PORTD |= (1 << LDVD);
-            timer01_ms(15000);
+            timer01_ms(500);        // lleva 12 segundos hasta este punto
+            PORTB &= ~(1 << LDPP);
+            PORTD |= (1 << LDVD);
+            timer01_ms(500);
+            PORTB |= (1 << LDPP);
+            PORTD |= (1 << LDVD);
+            timer01_ms(500);        // lleva 13 segundos hasta este punto
+            PORTB &= ~(1 << LDPP);
+            PORTD |= (1 << LDVD);
+            timer01_ms(500);        
+            PORTB |= (1 << LDPP);
+            PORTD |= (1 << LDVD);
+            timer01_ms(500);        // lleva 14 segundos hasta este punto
+            PORTB &= ~(1 << LDPP);
+            PORTD |= (1 << LDVD);
+            timer01_ms(1000);       // lleva 15 segundos hasta este punto
 
             // Regresa al estado inicial
             PORTB |= (1 << LDPV);    // LED Verde vehículo endendido

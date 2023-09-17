@@ -303,5 +303,9 @@ Circuit Id: Connector-334
 Unique  Id: Connector-336: 
 Circuit Id: Connector-336
 <item x="-72" labely="-24" labelx="-16" valLabRot="0" objectName="Connector-336" valLabelx="0" mainComp="false" itemtype="Connector" enodeid="Circ_eNode-352" y="-68" startpinid="Node-335-2" valLabely="0" boardPos="-1e+06,-1e+06" rotation="0" endpinid="Ground-6-Gnd" pointList="-72,-68,-72,-60" circPos="0,0" hflip="1" circRot="2.6698817433574807e+59" Show_id="false" vflip="1" id="Connector-336" boardRot="-1e+06" labelrot="0"/>
+
+Unique  Id: Connector-354: 
+Circuit Id: Connector-354
+<item x="-356" labely="-24" labelx="-16" valLabRot="0" objectName="Connector-354" valLabelx="0" mainComp="false" itemtype="Connector" enodeid="enode-354" y="-164" startpinid="Resistor-88-lPin" valLabely="0" boardPos="-1e+06,-1e+06" rotation="0" endpinid="attiny4313-1-PB0" pointList="-356,-164,-320,-164,-320,-196,-332,-196" circPos="0,0" hflip="1" circRot="1.3098259445460867e-269" Show_id="false" vflip="1" id="Connector-354" boardRot="-1e+06" labelrot="0"/>
  
 </circuit>

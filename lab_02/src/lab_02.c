@@ -95,27 +95,34 @@ int main(void) {
             // LDPV parpadeando durante 3 segundos de la luz verde
             // 3 SEGUNDOS
             PORTB &= ~(1 << LDPV);
-            PORTB &= ~(1 << LDPD);
+            PORTB |= (1 << LDPD);
             PORTB &= ~(1 << YELLOW); 
             timer01_ms(500);
             PORTB |= (1 << LDPV);
+            PORTB |= (1 << LDPD);
             timer01_ms(500);        // 1 segundo
             PORTB &= ~(1 << LDPV);
             PORTB &= ~(1 << YELLOW); 
+            PORTB |= (1 << LDPD);
             timer01_ms(500);
             PORTB |= (1 << YELLOW);
+            PORTB |= (1 << LDPD);
             timer01_ms(500);        // 2 segundos
             PORTB &= ~(1 << YELLOW); 
+            PORTB |= (1 << LDPD);
             timer01_ms(500);
+            PORTB |= (1 << LDPD);
             PORTB |= (1 << YELLOW);
             timer01_ms(500);        // 3 segundos
             PORTB &= ~(1 << LDPV);
             PORTB &= ~(1 << YELLOW); 
             // Encendido LED rojo vehículo
             PORTD |= (1 << LDVD);   // espera 1 segundo
+            PORTB |= (1 << LDPD);
             timer01_ms(1000);      
             // Encendido LED verde peatón
             PORTB |= (1 << LDPP);
+            PORTB &= ~(1 << LDPD);
             timer01_ms(10000);      // espera 11 segundos
             PORTB &= ~(1 << LDPP);
             PORTD |= (1 << LDVD);
@@ -137,6 +144,7 @@ int main(void) {
             timer01_ms(500);        // lleva 14 segundos hasta este punto
             PORTB &= ~(1 << LDPP);
             PORTD |= (1 << LDVD);
+            PORTB |= (1 << LDPD);
             timer01_ms(1000);       // lleva 15 segundos hasta este punto
 
             // Regresa al estado inicial

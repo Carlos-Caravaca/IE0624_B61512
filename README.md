@@ -2,7 +2,7 @@
 Este repositorio será utilizado para el curso IE-0624 Laboratorio de Microcontroladores
 
 ## Información ##
-Este repositorio contiene dos directorios. En `lab_01`, encontrarás el trabajo realizado por el estudiante **Carlos A. Caravaca Mora** (carné B61512). En el segundo directorio, `lab_02`, se encuentra el trabajo realizado por el mismo estudiante, en colaboración con **Erick Sancho Alvarado** (carné B87388).
+Este repositorio contiene dos directorios. En `lab_01`, encontrarás el trabajo realizado por el estudiante **Carlos A. Caravaca Mora** (carné B61512). En el segundo directorio, se encuentra el trabajo realizado por el mismo estudiante, en colaboración con **Erick Sancho Alvarado** (carné B87388).
 
 # Árbol de directoios: #
 
@@ -20,5 +20,14 @@ Este repositorio contiene dos directorios. En `lab_01`, encontrarás el trabajo 
         - **src**
             - lab_02.c
             - lab_02.simu
+            - Makefile
+    - **lab_04**
+        - **informe**
+            - informe.pdf
+        - **src**
+            - Todos los archivos
+            - ...
+            - ...
+            - ...
             - Makefile
     - **README.md**

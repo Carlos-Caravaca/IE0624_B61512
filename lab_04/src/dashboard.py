@@ -41,7 +41,7 @@ try:
         send_data_to_thingsboard(combined_data)
 
         # Espera un intervalo de tiempo (puedes ajustarlo)
-        time.sleep(10)  # Espera 10 segundos
+        time.sleep(0.5)  # Espera 10 segundos
 
 except KeyboardInterrupt:
     print("Terminado")

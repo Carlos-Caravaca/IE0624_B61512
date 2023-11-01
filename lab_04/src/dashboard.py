@@ -4,7 +4,7 @@ import random
 import serial
 
 # Configura la URL y el token de acceso de ThingsBoard
-ser = serial.Serial('COMX', 115200)  # Reemplaza 'COMX' con el puerto serie correcto y la velocidad correcta
+#ser = serial.Serial('COMX', 115200)  # Reemplaza 'COMX' con el puerto serie correcto y la velocidad correcta
 access_token = 'mtzd36o3ynydaptt4ywh'
 url = f'https://iot.eie.ucr.ac.cr/api/v1/{access_token}/telemetry'
 
@@ -28,11 +28,11 @@ try:
     while True:
         # Datos simulados para el giroscopio y el nivel de batería
         gyro_data = {
-            "gyro_x": random.uniform(-100, 100),
-            "gyro_y": random.uniform(-100, 100),
-            "gyro_z": random.uniform(-100, 100)
+            "Eje X": random.uniform(-100, 100),
+            "Eje Y": random.uniform(-100, 100),
+            "Eje Z": random.uniform(-100, 100)
         }
-        battery_data = {"battery_voltage": round(random.uniform(4.5, 5.5), 2)}
+        battery_data = {"Batería": round(random.uniform(4.5, 5.5), 2)}
 
         # Combinar datos en un solo diccionario
         combined_data = {**gyro_data, **battery_data}

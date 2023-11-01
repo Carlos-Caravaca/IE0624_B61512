@@ -1,14 +1,14 @@
-import serial
-import requests
 import time
-
-# Configuración del puerto serial/USB
-# ser = serial.Serial('/dev/ttyUSB0', 9600) 
+import requests
+import random
+import serial
 
 # Configura la URL y el token de acceso de ThingsBoard
+ser = serial.Serial('COMX', 115200)  # Reemplaza 'COMX' con el puerto serie correcto y la velocidad correcta
 access_token = 'mtzd36o3ynydaptt4ywh'
+url = f'https://iot.eie.ucr.ac.cr/api/v1/{access_token}/telemetry'
 
-# URL del servidor ThingsBoard 
+# URL del servidor ThingsBoard (ajusta la URL y el token de acceso)
 thingsboard_url = "https://iot.eie.ucr.ac.cr"
 
 
@@ -25,14 +25,14 @@ def send_data_to_thingsboard(data):
 
 
 try:
-    ser = serial.Serial('COM2', 9600)  # 'COM3' puerto serie 
     while True:
-        # Leer datos del puerto serial
-        serial_data = ser.readline().decode().strip()
-
-        # Procesar los datos del giroscopio y nivel de batería
-        gyro_data = {"gyro_x": 123, "gyro_y": 456, "gyro_z": 789}
-        battery_data = {"battery_voltage": 5.46}
+        # Datos simulados para el giroscopio y el nivel de batería
+        gyro_data = {
+            "gyro_x": random.uniform(-100, 100),
+            "gyro_y": random.uniform(-100, 100),
+            "gyro_z": random.uniform(-100, 100)
+        }
+        battery_data = {"battery_voltage": round(random.uniform(4.5, 5.5), 2)}
 
         # Combinar datos en un solo diccionario
         combined_data = {**gyro_data, **battery_data}
@@ -40,5 +40,8 @@ try:
         # Enviar los datos a ThingsBoard
         send_data_to_thingsboard(combined_data)
 
+        # Espera un intervalo de tiempo (puedes ajustarlo)
+        time.sleep(10)  # Espera 10 segundos
+
 except KeyboardInterrupt:
-    ser.close()
+    print("Terminado")

@@ -30,4 +30,7 @@ Este repositorio contiene dos directorios. En `lab_01`, encontrarás el trabajo 
             - ...
             - ...
             - Makefile
+    - **lab_05**
+        - **informe**
+            - informe.pdf
     - **README.md**

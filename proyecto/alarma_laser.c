@@ -1,7 +1,9 @@
  /*
  * Proyecto
  * Curso: Laboratorio de Microcontroladores
- * Nombre: Carlos A. Caravaca Mora; B61512
+ * Estudiantes: 
+ * Carlos A. Caravaca Mora - B61512
+ * Erick Sancho Alvarado - B87388
  * Ciclo: II
  * Ano: 2023
  * Descripcion: Alarma con modulo laser
